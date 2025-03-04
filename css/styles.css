@@ -1,1 +1,14 @@
+/* Estilos personalizados */
+body {
+    font-family: Arial, sans-serif;
+}
 
+.navbar {
+    margin-bottom: 20px;
+}
+
+footer {
+    margin-top: 40px;
+    padding: 20px 0;
+    background-color: #f8f9fa;
+}
