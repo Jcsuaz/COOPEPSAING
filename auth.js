@@ -1,4 +1,3 @@
-// auth.js
 import { auth, db } from './firebase-config.js';
 
 export function registerUser(email, password) {
@@ -10,8 +9,4 @@ export function registerUser(email, password) {
         role: "miembro",
       });
     });
-}
-
-export function loginUser(email, password) {
-  return auth.signInWithEmailAndPassword(email, password);
 }
