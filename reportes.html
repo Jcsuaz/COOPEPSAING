@@ -1,85 +1,45 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reportes - Cooperativa</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="COOPEPSAING/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reportes - COOPEPSAING</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-success">
-    <div class="container">
-      <a class="navbar-brand" href="index.html">Cooperativa</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="prestamos.html">Préstamos</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="reportes.html">Reportes</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="contacto.html">Contacto</a>
-          </li>
-          <li class="nav-item">
-            <button class="btn btn-danger" onclick="cerrarSesion()">Cerrar sesión</button>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">COOPEPSAING</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="prestamos.html">Préstamos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="reportes.html">Reportes</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-  <section class="py-5">
-    <div class="container">
-      <h2>Reportes de Préstamos</h2>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Monto</th>
-            <th>Fecha</th>
-          </tr>
-        </thead>
-        <tbody id="reportesTable">
-          <!-- Los reportes se cargarán aquí -->
-        </tbody>
-      </table>
-    </div>
-  </section>
+    <main class="container my-5">
+        <h1>Reportes</h1>
+        <p>Información sobre reportes y estadísticas.</p>
+    </main>
 
- <script ="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script ="https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js"></script>
-  <script ="https://www.gstatic.com/firebasejs/10.1.0/firebase-auth.js"></script>
-  <script ="https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.js"></script>
-  <script ="COOPEPSAING/firebase-config.js"></script>
-  <script src="COOPEPSAING/script.js"></script>
-  <script>
-    function cargarReportes() {
-      const reportesTable = document.getElementById('reportesTable');
-      reportesTable.innerHTML = '';
+    <footer class="bg-light text-center py-4">
+        <p>&copy; 2023 COOPEPSAING. Todos los derechos reservados.</p>
+    </footer>
 
-      db.collection('prestamos').get().then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          const data = doc.data();
-          const row = `
-            <tr>
-              <td>${data.nombre}</td>
-              <td>${data.monto}</td>
-              <td>${data.fecha}</td>
-            </tr>
-          `;
-          reportesTable.innerHTML += row;
-        });
-      }).catch((error) => {
-        console.error('Error al cargar reportes:', error);
-      });
-    }
-
-    cargarReportes();
-  </script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/scripts.js"></script>
 </body>
 </html>
