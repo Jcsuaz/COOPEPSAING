@@ -67,6 +67,7 @@
       const monto = document.getElementById('monto').value;
       const fecha = document.getElementById('fecha').value;
 
+      // Guardar en Firestore
       db.collection('prestamos').add({
         nombre,
         monto,
