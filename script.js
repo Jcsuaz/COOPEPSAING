@@ -1,16 +1,10 @@
-// Verificar autenticación
+// Lógica principal de la aplicación
 auth.onAuthStateChanged((user) => {
-  if (!user) {
-    // Redirigir a la página de registro si no está autenticado
-    window.location.href = "registro.html";
+  if (user) {
+    // Mostrar contenido principal
+    // Obtener y mostrar perfil del usuario
+    // Verificar rol y mostrar funcionalidades adecuadas
+  } else {
+    // Mostrar formularios de autenticación
   }
 });
-
-// Cerrar sesión
-function cerrarSesion() {
-  auth.signOut().then(() => {
-    window.location.href = "registro.html";
-  }).catch((error) => {
-    console.error('Error al cerrar sesión:', error);
-  });
-}
