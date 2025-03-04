@@ -1,12 +1,18 @@
+import { initializeApp } from 'firebase/app';
+import { getFirestore } from 'firebase/firestore';
+import { getAuth } from 'firebase/auth';
+
 const firebaseConfig = {
   apiKey: "AIzaSyDEtOa1WtWveT2yrwkzbz7fR4yE4xwqO1A",
   authDomain: "coopepsaing.firebaseapp.com",
   projectId: "coopepsaing",
   storageBucket: "coopepsaing.firebasestorage.app",
   messagingSenderId: "412483439859",
-  appId: "1:412483439859:web:acfe406607e8015d3e7b86",
+  appId: "1:412483439859:web:acfe406607e8015d3e7b86"
 };
 
-const app = firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
-const db = firebase.firestore();
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
+
+export { auth, db };
