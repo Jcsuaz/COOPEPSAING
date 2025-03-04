@@ -1,5 +1,4 @@
-// script.js
-import { registerUser, loginUser } from './auth.js';
+import { auth, db } from './firebase-config.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   const loginForm = document.getElementById('login-form');
@@ -12,9 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const email = document.getElementById('login-email').value;
     const password = document.getElementById('login-password').value;
 
-    loginUser(email, password)
+    auth.signInWithEmailAndPassword(email, password)
       .then(() => {
-        // Inicio de sesión exitoso
         authSection.style.display = 'none';
         mainContent.style.display = 'block';
       })
@@ -28,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const email = document.getElementById('register-email').value;
     const password = document.getElementById('register-password').value;
 
-    registerUser(email, password)
+    auth.createUserWithEmailAndPassword(email, password)
       .then(() => {
         alert('Registro exitoso');
       })
@@ -39,14 +37,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
   auth.onAuthStateChanged((user) => {
     if (user) {
-      // Usuario autenticado
       authSection.style.display = 'none';
       mainContent.style.display = 'block';
     } else {
-      // Usuario no autenticado
       authSection.style.display = 'block';
       mainContent.style.display = 'none';
     }
   });
 
+  // Prueba de conexión a Firestore
+  const testCollection = db.collection('testCollection');
+
+  testCollection.add({
+    message: '¡Conexión a Firestore exitosa!'
+  })
+  .then((docRef) => {
+    console.log('Documento escrito con ID: ', docRef.id);
+
+    testCollection.get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          console.log(doc.id, ' => ', doc.data());
+        });
+      })
+      .catch((error) => {
+        console.error('Error al leer documentos: ', error);
+      });
+  })
+  .catch((error) => {
+    console.error('Error al escribir documento: ', error);
+  });
 });
