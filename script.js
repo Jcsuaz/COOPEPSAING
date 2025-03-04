@@ -1,7 +1,4 @@
 import { auth, db } from './firebase-config.js';
-import { initializeApp } from 'firebase/app';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
-import { getFirestore, collection, addDoc, getDocs } from 'firebase/firestore';
 
 document.addEventListener('DOMContentLoaded', () => {
   const loginForm = document.getElementById('login-form');
@@ -9,33 +6,33 @@ document.addEventListener('DOMContentLoaded', () => {
   const mainContent = document.getElementById('main-content');
   const authSection = document.getElementById('auth-section');
 
-  loginForm.addEventListener('submit', (e) => {
+  loginForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const email = document.getElementById('login-email').value;
     const password = document.getElementById('login-password').value;
 
-    auth.signInWithEmailAndPassword(email, password)
-      .then(() => {
-        authSection.style.display = 'none';
-        mainContent.style.display = 'block';
-      })
-      .catch((error) => {
-        alert('Error al iniciar sesión: ' + error.message);
-      });
+    try {
+      await auth.signInWithEmailAndPassword(email, password);
+      authSection.style.display = 'none';
+      mainContent.style.display = 'block';
+    } catch (error) {
+      console.error('Error al iniciar sesión:', error.code, error.message);
+      alert('Error al iniciar sesión: ' + error.message);
+    }
   });
 
-  registerForm.addEventListener('submit', (e) => {
+  registerForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const email = document.getElementById('register-email').value;
     const password = document.getElementById('register-password').value;
 
-    auth.createUserWithEmailAndPassword(email, password)
-      .then(() => {
-        alert('Registro exitoso');
-      })
-      .catch((error) => {
-        alert('Error al registrar: ' + error.message);
-      });
+    try {
+      await auth.createUserWithEmailAndPassword(email, password);
+      alert('Registro exitoso');
+    } catch (error) {
+      console.error('Error al registrar:', error.code, error.message);
+      alert('Error al registrar: ' + error.message);
+    }
   });
 
   auth.onAuthStateChanged((user) => {
