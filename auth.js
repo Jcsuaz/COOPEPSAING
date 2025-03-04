@@ -1,24 +1,17 @@
-// Funciones de registro e inicio de sesión
-function registerUser(email, password) {
-  auth.createUserWithEmailAndPassword(email, password)
+// auth.js
+import { auth, db } from './firebase-config.js';
+
+export function registerUser(email, password) {
+  return auth.createUserWithEmailAndPassword(email, password)
     .then((userCredential) => {
       const user = userCredential.user;
-      db.collection("users").doc(user.uid).set({
+      return db.collection("users").doc(user.uid).set({
         email: email,
         role: "miembro",
       });
-    })
-    .catch((error) => {
-      console.error(error);
     });
 }
 
-function loginUser(email, password) {
-  auth.signInWithEmailAndPassword(email, password)
-    .then((userCredential) => {
-      // Redirigir al usuario a la página principal
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+export function loginUser(email, password) {
+  return auth.signInWithEmailAndPassword(email, password);
 }
