@@ -27,7 +27,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const password = document.getElementById('register-password').value;
 
     try {
-      await auth.createUserWithEmailAndPassword(email, password);
+      const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+      const user = userCredential.user;
+
+      // Guardar la información del usuario en Firestore
+      await db.collection('users').doc(user.uid).set({
+        email: email,
+        // ... otros datos del usuario que desees guardar ...
+      });
+
       alert('Registro exitoso');
     } catch (error) {
       console.error('Error al registrar:', error.code, error.message);
