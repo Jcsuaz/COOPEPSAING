@@ -1,4 +1,7 @@
 import { auth, db } from './firebase-config.js';
+import { initializeApp } from 'firebase/app';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { getFirestore, collection, addDoc, getDocs } from 'firebase/firestore';
 
 document.addEventListener('DOMContentLoaded', () => {
   const loginForm = document.getElementById('login-form');
