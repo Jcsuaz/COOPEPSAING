@@ -1,7 +1,5 @@
 // Funciones para gestionar préstamos
-import { initializeApp } from 'firebase/app';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
-import { getFirestore, collection, addDoc, getDocs } from 'firebase/firestore';
+import { auth, db } from './firebase-config.js';
 function requestLoan(userId, loanData) {
   return db.collection("loans").add({
     userId: userId,
