@@ -21,27 +21,27 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  registerForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const email = document.getElementById('register-email').value;
-    const password = document.getElementById('register-password').value;
+ registerForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const email = document.getElementById('register-email').value;
+  const password = document.getElementById('register-password').value;
 
-    try {
-      const userCredential = await auth.createUserWithEmailAndPassword(email, password);
-      const user = userCredential.user;
+  try {
+    const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+    const user = userCredential.user;
 
-      // Guardar la información del usuario en Firestore
-      await db.collection('users').doc(user.uid).set({
-        email: email,
+    // Guardar la información del usuario en Firestore
+    await db.collection("users").doc(user.uid).set({
+      email: email,
         // ... otros datos del usuario que desees guardar ...
       });
 
       alert('Registro exitoso');
-    } catch (error) {
-      console.error('Error al registrar:', error.code, error.message);
-      alert('Error al registrar: ' + error.message);
-    }
-  });
+  } catch (error) {
+    console.error('Error al registrar:', error.code, error.message);
+    alert('Error al registrar: ' + error.message);
+  }
+});
 
   auth.onAuthStateChanged((user) => {
     if (user) {
