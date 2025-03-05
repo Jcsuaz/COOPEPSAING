@@ -30,18 +30,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const userCredential = await auth.createUserWithEmailAndPassword(email, password);
     const user = userCredential.user;
 
-    // Guardar la información del usuario en Firestore
-    await db.collection("users").doc(user.uid).set({
-      email: email,
-        // ... otros datos del usuario que desees guardar ...
-      });
-
+   // Guardar la información del usuario en Firestore
+  await db.collection("users").doc(user.uid).set({
+    email: email,
+      // ... otros datos del usuario que desees guardar ...
+    })
+    .then(() => {
       alert('Registro exitoso');
-  } catch (error) {
-    console.error('Error al registrar:', error.code, error.message);
-    alert('Error al registrar: ' + error.message);
-  }
-});
+    })
+    .catch((error) => {
+      console.error('Error al guardar en Firestore:', error);
+      alert('Error al registrar: ' + error.message);
+    });
 
   auth.onAuthStateChanged((user) => {
     if (user) {
