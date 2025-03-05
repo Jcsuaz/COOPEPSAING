@@ -1,0 +1,14 @@
+registerForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const email = document.getElementById('register-email').value;
+  const password = document.getElementById('register-password').value;
+
+  console.log('Email:', email);
+  console.log('Password:', password);
+
+  try {
+    // ... tu código de registro ...
+  } catch (error) {
+    // ... manejo de errores ...
+  }
+});
